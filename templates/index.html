@@ -1,0 +1,23 @@
+<html>
+  <head>
+    <title>Video Streaming Demonstration</title>
+  </head>
+  <body>
+    <div class="content">
+    <h1>Video Streaming Demonstration</h1>
+
+    {% if stat == 1 %}
+    <h1>카메라 켜짐</h1>
+    {% else %}
+    <h1>카메라 꺼짐</h1>
+    {% endif %}
+    <hr>
+    <a href="{{ url_for('power_control', state=1) }}"><input type="button" value="ON" ></a>
+    <a href="{{ url_for('power_control', state=0) }}"><input type="button" value="OFF"> </a>
+    <hr>
+    {% if stat == 1 %}
+    <img src="{{ url_for('video_feed') }}">
+    {% endif %}
+  </div>
+  </body>
+</html>
