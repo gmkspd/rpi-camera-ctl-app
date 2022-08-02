@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: picamera-app
+  name: picamera-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: picamera-app
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: picamera-app
+    spec:
+      containers:
+      - image: gmkspd/picamera2-base
+        name: picamera2-base
+        resources: {}
+        securityContext:
+          privileged: true
+          runAsUser: 0
+        command: ['python3', '/root/rpi-camera-ctl-app/app.py']
+        ports:
+        - containerPort: 5000
+status: {}
