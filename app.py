@@ -46,4 +46,4 @@ def power_control(state):
 
 
 if __name__ == '__main__':
-    app.run(host='10.1.1.49', threaded=True)
+    app.run(host='0.0.0.0', threaded=True)
