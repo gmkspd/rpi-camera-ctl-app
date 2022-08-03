@@ -19,6 +19,7 @@ spec:
     spec:
       containers:
       - image: gmkspd/picamera2-base
+        imagePullPolicy: IfNotPresent
         name: picamera2-base
         resources: {}
         securityContext:
