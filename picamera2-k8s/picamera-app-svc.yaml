@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: picamera-app
+  name: picamera-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: picamera-app
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: picamera-app
+    spec:
+      containers:
+      - image: gmkspd/picamera2-base
+        imagePullPolicy: IfNotPresent
+        name: picamera2-base
+        resources: {}
+        securityContext:
+          privileged: true
+          runAsUser: 0
+        command: ['python3', '/root/rpi-camera-ctl-app/app.py']
+        ports:
+        - containerPort: 5000
+      nodeSelector:
+        kubernetes.io/hostname: w1-rpi-k8s
+status: {}
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: picamera-app
+  name: picamera-svc
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 5000
+  selector:
+    app: picamera-app
+  type: LoadBalancer
+status:
+  loadBalancer: {}
+
